@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Header from './Header'
+import Button from './Button';
+import Input from './Input';
 
-function App() {
+
+const App: React.FC = () => {
+
+  const [counter, setCounter] = useState<number>(0)
+  const [text, setText] = useState<string[]>([])
+
+  const handleClick = () => {
+    setCounter(counter + 1)
+  }
+  
+  const handleEnter = (txt: string) => {
+    setText([...text, txt])
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Header
+          text="The button increments the number below."
+          number={counter}
         >
-          Learn React
-        </a>
+          <Input handleEnter={handleEnter} />
+          <Button title="Button" handleClick={handleClick}/>
+        </Header>
+        {text.map(txt => (
+            <div>{txt}</div>
+          ))}
       </header>
     </div>
   );
 }
 
-export default App;
+export default App
