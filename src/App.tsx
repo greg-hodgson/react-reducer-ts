@@ -29,7 +29,7 @@ const App: React.FC = () => {
           <Button title="Button" handleClick={handleClick}/>
         </Header>
         {text.map(txt => (
-            <div>{txt}</div>
+            <div key={txt}>{txt}</div>
           ))}
       </header>
     </div>
